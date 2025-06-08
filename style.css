@@ -22,3 +22,40 @@ body {
 #mindmap li:hover {
   background: #e0f7fa;
 }
+/* Default heading style */
+h1, h2, h3 {
+  color: #1a73e8; /* Blue when closed */
+  cursor: pointer;
+  margin: 0.5em 0;
+  padding-left: 1.2em;
+}
+
+/* Add a prefix symbol for headings with content */
+h1:not(:empty):before,
+h2:not(:empty):before,
+h3:not(:empty):before {
+  content: '+'; /* Default: closed state */
+  margin-right: 0.5em;
+  color: #1a73e8;
+}
+
+/* Opened state: change color and prefix */
+h1.is-open,
+h2.is-open,
+h3.is-open {
+  color: #e91e63; /* Pink when open */
+}
+
+h1.is-open:before,
+h2.is-open:before,
+h3.is-open:before {
+  content: '−'; /* Minus sign for open state */
+  color: #e91e63;
+}
+
+/* Or use Unicode arrows if you prefer */
+/* h1.is-open:before,
+   h2.is-open:before,
+   h3.is-open:before {
+  content: '\25B5'; /* White up-pointing small triangle */
+*/

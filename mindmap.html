@@ -6,6 +6,27 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<script >
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('h1, h2, h3').forEach(heading => {
+    heading.addEventListener('click', function() {
+      // Find the next sibling until the next heading of same or higher level
+      let content = [];
+      let next = heading.nextElementSibling;
+      while (next && !(next.tagName === 'H1' || next.tagName === 'H2' || next.tagName === 'H3' && parseInt(next.tagName[1]) <= parseInt(heading.tagName[1]))) {
+        content.push(next);
+        next = next.nextElementSibling;
+      }
+      // Toggle visibility of content
+      content.forEach(el => el.classList.toggle('is-visible'));
+      // Toggle class on heading
+      heading.classList.toggle('is-open');
+    });
+  });
+});
+
+</script >
+
   <a href="index.html">&larr; Back to Index</a>
   <div id="mindmap"></div>
   <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>

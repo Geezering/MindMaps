@@ -4,32 +4,122 @@
   <meta charset="UTF-8">
   <title>Mind Map Viewer</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+    #mindmap {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1em;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    /* Main headings (h1): colored background */
+    #mindmap h1 {
+      background-color: #e8f5e9;
+      padding: 0.5em;
+      border-radius: 6px;
+      margin: 0.5em 0;
+      cursor: pointer;
+    }
+    /* Subheadings (h2, h3): colored backgrounds */
+    #mindmap h2 {
+      background-color: #e3f2fd;
+      padding: 0.5em;
+      border-radius: 6px;
+      margin: 0.5em 0;
+      cursor: pointer;
+    }
+    #mindmap h3 {
+      background-color: #fce4ec;
+      padding: 0.5em;
+      border-radius: 6px;
+      margin: 0.5em 0;
+      cursor: pointer;
+    }
+    /* Content under headings (including bullet lists, paragraphs, etc.) */
+    #mindmap .collapsible-content {
+      background: #f8f8f8;
+      padding: 0.5em 1em;
+      border-radius: 4px;
+      margin: 0.5em 0;
+    }
+    /* Hide content by default */
+    #mindmap .collapsible-content {
+      display: none;
+    }
+    /* Show content when heading is open */
+    #mindmap h1.is-open ~ .collapsible-content,
+    #mindmap h2.is-open ~ .collapsible-content,
+    #mindmap h3.is-open ~ .collapsible-content {
+      display: block;
+    }
+    /* Root-level bullet lists (not under any heading) are always visible */
+    #mindmap > ul, #mindmap > ol {
+      background: #f8f8f8;
+      padding: 0.5em 1em;
+      border-radius: 4px;
+      margin: 0.5em 0;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-<script >
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('h1, h2, h3').forEach(heading => {
-    heading.addEventListener('click', function() {
-      // Find the next sibling until the next heading of same or higher level
-      let content = [];
-      let next = heading.nextElementSibling;
-      while (next && !(next.tagName === 'H1' || next.tagName === 'H2' || next.tagName === 'H3' && parseInt(next.tagName[1]) <= parseInt(heading.tagName[1]))) {
-        content.push(next);
-        next = next.nextElementSibling;
-      }
-      // Toggle visibility of content
-      content.forEach(el => el.classList.toggle('is-visible'));
-      // Toggle class on heading
-      heading.classList.toggle('is-open');
-    });
-  });
-});
-
-</script >
-
   <a href="index.html">&larr; Back to Index</a>
   <div id="mindmap"></div>
   <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
-  <script src="mindmap.js"></script>
+  <script>
+    // Set up Showdown
+    const converter = new showdown.Converter();
+
+    // Example: Load a markdown file from GitHub (replace URL with your file)
+    // You can also use the query parameter to specify the file, e.g., mindmap.html?file=path/to/file.md
+    const file = new URLSearchParams(window.location.search).get('file') || 'README.md';
+    const markdownUrl = `https://raw.githubusercontent.com/your-username/your-repo/main/${file}`;
+
+    fetch(markdownUrl)
+      .then(response => {
+        if (!response.ok) throw new Error('Markdown file not found');
+        return response.text();
+      })
+      .then(text => {
+        // Convert markdown to HTML
+        let html = converter.makeHtml(text);
+        // Wrap content after each heading in a collapsible-content div
+        // This is a simple regex-based approach; for complex docs, consider a DOM parser
+        html = html.replace(/<h([1-3])>(.*?)<\/h\1>(.*?)(?=<h[1-3]>|$)/gs, function(match, level, title, content) {
+          // Remove empty content
+          content = content.trim();
+          if (!content) return match;
+          // Wrap content in a collapsible-content div
+          return `<h${level}>${title}</h${level}><div class="collapsible-content">${content}</div>`;
+        });
+        document.getElementById('mindmap').innerHTML = html;
+
+        // Make headings collapsible
+        document.querySelectorAll('#mindmap h1, #mindmap h2, #mindmap h3').forEach(heading => {
+          heading.addEventListener('click', function() {
+            // Toggle is-open class on heading
+            heading.classList.toggle('is-open');
+          });
+        });
+      })
+      .catch(error => {
+        document.getElementById('mindmap').innerHTML = `<p>Error loading markdown: ${error.message}</p>`;
+      });
+
+    // Collapsible headings for static content (if any)
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('#mindmap h1, #mindmap h2, #mindmap h3').forEach(heading => {
+        heading.addEventListener('click', function() {
+          heading.classList.toggle('is-open');
+        });
+      });
+    });
+  </script>
 </body>
 </html>

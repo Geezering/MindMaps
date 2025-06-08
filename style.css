@@ -1,0 +1,24 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  padding: 20px;
+}
+#mindmap {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 300px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+#mindmap ul {
+  list-style: none;
+  padding-left: 20px;
+}
+#mindmap li {
+  cursor: pointer;
+  margin: 5px 0;
+  transition: background 0.2s;
+}
+#mindmap li:hover {
+  background: #e0f7fa;
+}

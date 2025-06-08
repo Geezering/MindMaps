@@ -3,6 +3,7 @@ body {
   background: #f9f9f9;
   padding: 20px;
 }
+
 #mindmap {
   background: #fff;
   border-radius: 8px;
@@ -10,52 +11,29 @@ body {
   min-height: 300px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
+#mindmap h1,
+#mindmap h2,
+#mindmap h3 {
+  cursor: pointer;
+  margin: 0.5em 0;
+  padding-left: 0;
+  /* Remove padding-left if you don't want indentation */
+}
+
 #mindmap ul {
   list-style: none;
   padding-left: 20px;
 }
+
 #mindmap li {
   cursor: pointer;
   margin: 5px 0;
   transition: background 0.2s;
 }
+
 #mindmap li:hover {
   background: #e0f7fa;
 }
-/* Default heading style */
-h1, h2, h3 {
-  color: #1a73e8; /* Blue when closed */
-  cursor: pointer;
-  margin: 0.5em 0;
-  padding-left: 1.2em;
-}
 
-/* Add a prefix symbol for headings with content */
-h1:not(:empty):before,
-h2:not(:empty):before,
-h3:not(:empty):before {
-  content: '+'; /* Default: closed state */
-  margin-right: 0.5em;
-  color: #1a73e8;
-}
-
-/* Opened state: change color and prefix */
-h1.is-open,
-h2.is-open,
-h3.is-open {
-  color: #e91e63; /* Pink when open */
-}
-
-h1.is-open:before,
-h2.is-open:before,
-h3.is-open:before {
-  content: '−'; /* Minus sign for open state */
-  color: #e91e63;
-}
-
-/* Or use Unicode arrows if you prefer */
-/* h1.is-open:before,
-   h2.is-open:before,
-   h3.is-open:before {
-  content: '\25B5'; /* White up-pointing small triangle */
-*/
+/* Removed all :before rules for headings to avoid prefix symbols */

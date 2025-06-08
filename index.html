@@ -31,11 +31,72 @@
       text-decoration: underline;
     }
   </style>
+  <script>
+    const mindmaps = [ /* ... your existing array ... */ ];
+
+    const list = document.getElementById('mindmap-list');
+    mindmaps.forEach(item => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `mindmap.html?file=${encodeURIComponent(item.file)}`;
+        a.textContent = item.name;
+        
+        // Add classification classes based on name prefixes
+        if (item.name.includes('Post Modernism:')) {
+            li.classList.add('post-modernism');
+        } else if (item.name.includes('Pre Modernism:')) {
+            li.classList.add('pre-modernism');
+        } else if (item.name.includes('Modernism:')) {
+            li.classList.add('modernism');
+        }
+
+        li.appendChild(a);
+        list.appendChild(li);
+    });
+</script>
+
+<style>
+    /* Background color styling */
+    .pre-modernism {
+        background-color: #e8f5e9;  /* Light green */
+        border-left: 4px solid #43a047;
+    }
+    
+    .modernism {
+        background-color: #e3f2fd;  /* Light blue */
+        border-left: 4px solid #2196f3;
+    }
+    
+    .post-modernism {
+        background-color: #fce4ec;  /* Light pink */
+        border-left: 4px solid #e91e63;
+    }
+
+    /* List item styling */
+    #mindmap-list li {
+        margin: 8px 0;
+        padding: 12px 15px;
+        border-radius: 4px;
+        transition: transform 0.2s ease;
+    }
+
+    #mindmap-list li:hover {
+        transform: translateX(5px);
+    }
+
+    #mindmap-list a {
+        text-decoration: none;
+        color: #2d3436;
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 16px;
+    }
+</style>
+
 </head>
 <body>
   <h1>Mind Map Index</h1>
   <ul id="mindmap-list"></ul>
-  <script>
+<script>
     // Array of mind maps with updated paths for the md_docs folder
     const mindmaps = [
 { file: "md_docs/Early Northern Renaissance.md", name: "Pre Modernism: Early Northern Renaissance.md" },
@@ -57,13 +118,13 @@
 { file: "md_docs/Post Impressionism.md", name: "Modernism: Post Impressionism.md" },
 { file: "md_docs/Pointilism.md", name: "Modernism: Pointilism.md" },
 { file: "md_docs/Fauvism.md", name: "Modernism: Fauvism.md" },
-{ file: "md_docs/Analytic Cubism.md", name: "Analytic Cubism.md" },
+{ file: "md_docs/Analytic Cubism.md", name: "Modernism: Analytic Cubism.md" },
 { file: "md_docs/Expressionism.md", name: "Modernism: Expressionism.md" },
 { file: "md_docs/Feminist Art.md", name: "Post Modernism: Feminist Art.md" },
 { file: "md_docs/Futurism.md", name: "Modernism: Futurism.md" },
 { file: "md_docs/Synthetic Cubism.md", name: "Modernism: Synthetic Cubism.md" },
 { file: "md_docs/Suprematism.md", name: "Modernism: Suprematism.md" },
-{ file: "md_docs/Constructivism.md", name: "Constructivism.md" },
+{ file: "md_docs/Constructivism.md", name: "Modernism: Constructivism.md" },
 { file: "md_docs/De Stijl.md", name: "Modernism: De Stijl.md" },
 { file: "md_docs/DaDa.md", name: "Modernism: DaDa.md" },
 { file: "md_docs/Surrealism.md", name: "Modernism: Surrealism.md" },
@@ -71,14 +132,14 @@
 { file: "md_docs/Not aligned artists.md", name: "Modernism: Not aligned artists.md" },
 { file: "md_docs/School of Paris.md", name: "Modernism: School of Paris.md" },
 { file: "md_docs/Post War Paris.md", name: "Modernism: Post War Paris.md" },
-{ file: "md_docs/Abstract Expressionism.md", name: "Abstract Expressionism.md" },
+{ file: "md_docs/Abstract Expressionism.md", name: "Modernism: Abstract Expressionism.md" },
 { file: "md_docs/Neo DaDa.md", name: "Modernism: Neo DaDa.md" },
 { file: "md_docs/Late Modernism.md", name: "Modernism: Late Modernism.md" },
 { file: "md_docs/Minimalism.md", name: "Modernism: Minimalism.md" },
 { file: "md_docs/Op Art.md", name: "Modernism: Op Art.md" },
 { file: "md_docs/Pop Art.md", name: "Modernism: Pop Art.md" },
-{ file: "md_docs/Conceptual Art.md", name: "Conceptual Art.md" },
-{ file: "md_docs/Arte Povera.md", name: "Arte Povera.md" },
+{ file: "md_docs/Conceptual Art.md", name: "Modernism: Conceptual Art.md" },
+{ file: "md_docs/Arte Povera.md", name: "Modernism: Arte Povera.md" },
 { file: "md_docs/Land Art.md", name: "Modernism: Land Art.md" },
 { file: "md_docs/Performance Art.md", name: "Modernism: Performance Art.md" },
 { file: "md_docs/Post Modernism.md", name: "Post Modernism: Post Modernism.md" },
@@ -87,7 +148,7 @@
 { file: "md_docs/New Expressionism and New Image painting.md", name: "Post Modernism: New Expressionism and New Image painting.md" },
 { file: "md_docs/Neo Geo.md", name: "Post Modernism: Neo Geo.md" },
 { file: "md_docs/YBA.md", name: "Post Modernism: YBA.md" },
-{ file: "md_docs/BANK.md", name:"Post Modern: BANK.md" },
+{ file: "md_docs/BANK.md", name:"Post Modernism: BANK.md" },
       // Add more as needed, e.g. { file: "md_docs/Surrealism.md", name: "Surrealism" }
     ];
 

@@ -31,15 +31,15 @@ if (!file) {
 
       mindmapDiv.innerHTML = html;
 
-      // Add click listeners to headings
-      const headings = mindmapDiv.querySelectorAll('h1, h2, h3');
-      headings.forEach(heading => {
-        heading.style.cursor = 'pointer';
-        heading.addEventListener('click', () => {
-          heading.classList.toggle('is-open');
-        });
-      });
-    })
+// Add click listeners to headings
+const headings = mindmapDiv.querySelectorAll('h1, h2, h3');
+headings.forEach(heading => {
+  heading.style.cursor = 'pointer';
+  heading.addEventListener('click', () => {
+    heading.classList.toggle('is-open');
+  });
+});
+
     .catch(err => {
       mindmapDiv.innerHTML = `<p>Error loading mind map: ${err.message}</p>`;
     });

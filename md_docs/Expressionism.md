@@ -71,21 +71,21 @@
 
 # Three Short Points for Each Artist
 
-| Artist                  | Key Themes, Ideas, and Artistic Aspects                                                                                  |
-|-|-|
-| 
-Ernst Ludwig Kirchner
- | 1. Used jagged lines and bright, unnatural colours for emotion.<br>2. Painted city scenes full of tension and anxiety.<br>3. Helped lead the *Die Brücke* group for new, expressive art. |
-| 
-Emil Nolde
-          | 1. Used vivid colours and rough brushwork for spiritual intensity.<br>2. Painted mystical, dreamlike scenes.<br>3. Expressed strong feelings through distortion and exaggeration. |
-| 
-Käthe Kollwitz
-      | 1. Focused on suffering and social injustice.<br>2. Used bold forms and contrasts for emotional power.<br>3. Made prints and sculptures to inspire empathy and change. |
+## Ernst Ludwig Kirchner
+1. Used jagged lines and bright, unnatural colours for emotion.
+2. Painted city scenes full of tension and anxiety.
+. Helped lead the *Die Brücke* group for new, expressive art. 
+## Emil Nolde
+1. Used vivid colours and rough brushwork for spiritual intensity.
+2. Painted mystical, dreamlike scenes.
+3. Expressed strong feelings through distortion and exaggeration. 
+## Käthe Kollwitz
+1. Focused on suffering and social injustice.
+2. Used bold forms and contrasts for emotional power.
+3. Made prints and sculptures to inspire empathy and change. 
 
-
-
-Expressionism was a movement where artists put their own feelings and ideas at the centre of their art, using dramatic techniques to make viewers feel the intensity of modern life[1][2][5].
+## Expressionism was a movement: 
+- Where artists put their own feelings and ideas at the centre of their art, using dramatic techniques to make viewers feel the intensity of modern life[1][2][5].
 
 # Sources
 1. [[1] Expressionism - Wikipedia](https://en.wikipedia.org/wiki/Expressionism)

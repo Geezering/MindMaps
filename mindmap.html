@@ -5,51 +5,75 @@
   <title>Mind Map Viewer</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    #mindmap .collapsible-content {
-      display: none;
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
     }
-    #mindmap h1.is-open ~ .collapsible-content,
-    #mindmap h2.is-open ~ .collapsible-content,
-    #mindmap h3.is-open ~ .collapsible-content {
+    #mindmap {
+      background: #fff;
+      padding: 1em;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    #mindmap h1,
+    #mindmap h2,
+    #mindmap h3 {
+      cursor: pointer;
+      margin: 0.5em 0;
+      padding-left: 0;
+    }
+    #mindmap h1::before,
+    #mindmap h2::before,
+    #mindmap h3::before {
+      content: " ∨ ";
+      cursor: pointer;
+      user-select: none;
+      margin-right: 0.5em;
+      color: #555;
+      font-weight: bold;
+    }
+    #mindmap h1.is-open::before,
+    #mindmap h2.is-open::before,
+    #mindmap h3.is-open::before {
+      content: " ∧ ";
+    }
+    #mindmap ul {
+      list-style-type: disc;
+      padding-left: 1.5em;
+    }
+    #mindmap li {
+      margin: 5px 0;
+      transition: background 0.2s;
+    }
+    #mindmap li:hover {
+      background: #e0f7fa;
+    }
+    .collapsible-content {
+      display: none;
+      margin-left: 1.5em;
+    }
+    .is-open + .collapsible-content {
       display: block;
+    }
+    a.back-link {
+      display: inline-block;
+      margin-bottom: 1em;
+      color: #1976d2;
+      text-decoration: none;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <a href="index.html">&larr; Back to Index</a>
+  <a href="index.html" class="back-link">&larr; Back to Index</a>
   <div id="mindmap"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
-  <script>
-    const file = new URLSearchParams(window.location.search).get('file');
-    if (!file) {
-      document.getElementById('mindmap').innerHTML = '<p>No file specified.</p>';
-    } else {
-      fetch(file)
-        .then(response => {
-          if (!response.ok) throw new Error('Markdown file not found');
-          return response.text();
-        })
-        .then(text => {
-          const converter = new showdown.Converter();
-          let html = converter.makeHtml(text);
-          // Wrap all content after each heading in a collapsible-content div
-          html = html.replace(/<h([1-3])>(.*?)<\/h\1>(.*?)(?=<h[1-3]>|$)/gs, function(match, level, title, content) {
-            content = content.trim();
-            if (!content) return match;
-            return `<h${level}>${title}</h${level}><div class="collapsible-content">${content}</div>`;
-          });
-          document.getElementById('mindmap').innerHTML = html;
-          // Make headings collapsible
-          document.querySelectorAll('#mindmap h1, #mindmap h2, #mindmap h3').forEach(heading => {
-            heading.addEventListener('click', function() {
-              heading.classList.toggle('is-open');
-            });
-          });
-        })
-        .catch(error => {
-          document.getElementById('mindmap').innerHTML = `<p>Error loading markdown: ${error.message}</p>`;
-        });
-    }
-  </script>
+  <script src="mindmap.js"></script>
 </body>
 </html>

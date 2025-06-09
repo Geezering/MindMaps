@@ -1,45 +1,10 @@
+/* General page styling */
 body {
   font-family: Arial, sans-serif;
   background: #f9f9f9;
   padding: 20px;
-}
-
-#mindmap {
-  background: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  min-height: 300px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-#mindmap h1,
-#mindmap h2,
-#mindmap h3 {
-  cursor: pointer;
-  margin: 0.5em 0;
-}
-
-#mindmap ul {
-  list-style-type: disc;
-  padding-left: 1.5em;
-}
-
-.collapsible-content {
-  display: none;
-  margin-left: 1.5em;
-}
-.is-open + .collapsible-content {
-  display: block;
-}
-
-
-#mindmap li {
-  margin: 5px 0;
-  transition: background 0.2s;
-}
-
-#mindmap li:hover {
-  background: #e0f7fa;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 a.back-link {
@@ -51,4 +16,87 @@ a.back-link {
 
 a.back-link:hover {
   text-decoration: underline;
+}
+
+/* Mindmap content area */
+#mindmap {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings and collapsible controls */
+#mindmap h1,
+#mindmap h2,
+#mindmap h3 {
+  cursor: pointer;
+  margin: 0.75em 0 0.25em;
+  padding: 0.5em 0;
+  border-bottom: 1px solid #eee;
+}
+
+#mindmap h1::before,
+#mindmap h2::before,
+#mindmap h3::before {
+  content: " ∨ ";
+  cursor: pointer;
+  user-select: none;
+  margin-right: 0.5em;
+  color: #555;
+  font-weight: bold;
+}
+
+#mindmap h1.is-open::before,
+#mindmap h2.is-open::before,
+#mindmap h3.is-open::before {
+  content: " ∧ ";
+}
+
+/* Collapsible content */
+.collapsible-content {
+  display: none;
+  margin-left: 1.5em;
+  padding: 0.5em 0;
+}
+
+.is-open + .collapsible-content {
+  display: block;
+}
+
+/* Lists and bullets */
+#mindmap ul {
+  list-style-type: disc;
+  padding-left: 2em;
+  margin: 0.5em 0;
+}
+
+#mindmap ol {
+  list-style-type: decimal;
+  padding-left: 2em;
+  margin: 0.5em 0;
+}
+
+#mindmap li {
+  margin: 5px 0;
+  transition: background 0.2s;
+}
+
+#mindmap li:hover {
+  background: #e0f7fa;
+}
+
+/* Paragraphs and other content */
+#mindmap p {
+  margin: 0.5em 0;
+}
+
+/* Images */
+#mindmap img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.5em auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -2,9 +2,8 @@ body {
   font-family: Arial, sans-serif;
   background: #f9f9f9;
   padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
 }
+
 #mindmap {
   background: #fff;
   border-radius: 8px;
@@ -12,22 +11,44 @@ body {
   min-height: 300px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
 #mindmap h1,
 #mindmap h2,
 #mindmap h3 {
   cursor: pointer;
   margin: 0.5em 0;
-  padding-left: 0;
 }
+
 #mindmap ul {
-  list-style: none;
-  padding-left: 20px;
+  list-style-type: disc;
+  padding-left: 1.5em;
 }
+
+.collapsible-content {
+  display: none;
+  margin-left: 1.5em;
+}
+
+.is-open + .collapsible-content {
+  display: block;
+}
+
 #mindmap li {
-  cursor: pointer;
   margin: 5px 0;
   transition: background 0.2s;
 }
+
 #mindmap li:hover {
   background: #e0f7fa;
+}
+
+a.back-link {
+  display: inline-block;
+  margin-bottom: 1em;
+  color: #1976d2;
+  text-decoration: none;
+}
+
+a.back-link:hover {
+  text-decoration: underline;
 }

@@ -6,7 +6,11 @@ function getQueryParam(name) {
 }
 
 const file = getQueryParam('file');
-if (file) {
+const mindmapDiv = document.getElementById('mindmap');
+
+if (!file) {
+  mindmapDiv.innerHTML = "<p>No mind map specified.</p>";
+} else {
   fetch(file)
     .then(response => {
       if (!response.ok) throw new Error('File not found');
@@ -14,28 +18,29 @@ if (file) {
     })
     .then(markdown => {
       const converter = new showdown.Converter();
-      const html = converter.makeHtml(markdown);
-      document.getElementById('mindmap').innerHTML = html;
-      makeInteractive();
+      let html = converter.makeHtml(markdown);
+
+      // Wrap content after each heading in collapsible-content div
+      // This regex matches <h1>, <h2>, <h3> and captures content until next heading or end
+      html = html.replace(/(<h([1-3])>.*?<\/h\2>)([\s\S]*?)(?=<h[1-3]>|$)/g, (match, heading, level, content) => {
+        // Trim content to avoid empty collapsible divs
+        content = content.trim();
+        if (!content) return heading; // No content to collapse
+        return `${heading}<div class="collapsible-content">${content}</div>`;
+      });
+
+      mindmapDiv.innerHTML = html;
+
+      // Add click listeners to headings
+      const headings = mindmapDiv.querySelectorAll('h1, h2, h3');
+      headings.forEach(heading => {
+        heading.style.cursor = 'pointer';
+        heading.addEventListener('click', () => {
+          heading.classList.toggle('is-open');
+        });
+      });
     })
     .catch(err => {
-      document.getElementById('mindmap').innerHTML = `<p>Error loading mind map: ${err.message}</p>`;
+      mindmapDiv.innerHTML = `<p>Error loading mind map: ${err.message}</p>`;
     });
-} else {
-  document.getElementById('mindmap').innerHTML = "<p>No mind map specified.</p>";
-}
-
-// The same makeInteractive function as before
-function makeInteractive() {
-  const nodes = document.querySelectorAll('#mindmap ul');
-  nodes.forEach(ul => {
-    const parent = ul.previousElementSibling;
-    if (parent && parent.tagName.match(/^H[2-6]$/)) {
-      ul.style.display = 'none';
-      parent.style.cursor = 'pointer';
-      parent.addEventListener('click', () => {
-        ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
-      });
-    }
-  });
 }
